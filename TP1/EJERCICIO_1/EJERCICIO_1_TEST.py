@@ -1,4 +1,4 @@
-from TP1.EJERCICIO_1 import encontar_maximo
+from EJERCICIO_1 import encontar_maximo
 
 def test_casos_maximo_unico():
 
@@ -15,3 +15,7 @@ def test_casos_sin_maximo_unico():
     assert encontar_maximo(3, 3, 3) == -1
 
     print("Todos los casos de maximo sin unico pasaron correctamente.")
+
+if __name__ == "__main__":
+    test_casos_maximo_unico()
+    test_casos_sin_maximo_unico()

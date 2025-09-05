@@ -12,7 +12,7 @@ def intercalar_listas(a: list, b: list) -> list:
     return a
 
 def main():
-    lista1 = [8, 1, 3]
+    lista1 = [8, 1, 3, 9, 9, 10, 11]
     lista2 = [5, 9, 7]
     intercalar_listas(lista1, lista2)
     print(lista1)

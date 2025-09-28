@@ -4,55 +4,180 @@ Desarrollar funciones que generen cada una de ellas sin intervención humana y e
 que las invoque e imprima por pantalla. 
 El tamaño de las matrices debe establecerse como N x N, donde N se ingresa a través del teclado.
 
-a: 1 0 0 0, 0 3 0 0, 0 0 5 0, 0 0 0 7 
-b: 0 0 0 27, 0 0 9 0, 0 3 0 0, 1 0 0 0 
-c: 4 0 0 0, 3 3 0 0, 2 2 2 0, 1 1 1 1
-d: 8 8 8 8, 4 4 4 4, 2 2 2 2, 1 1 1 1
-e: 0 1 0 2, 3 0 4 0, 0 5 0 6, 7 0 8 0
-f: 0 0 0 1, 0 0 3 2, 0 6 5 4, 10 9 8 7
-g: 1 2 3 4, 12 13 14 5, 11 16 15 6, 10 9 8 7
-h: 1 2 4 7, 3 5 8 11, 6 9 12 14, 10 13 15 16
-i: 1 2 6 7, 3 5 8 13, 4 9 12 14, 10 15 11 16
+a: 01 00 00 00  b: 00 00 00 27   c: 04 00 00 00 
+   00 03 00 00     00 00 09 00      03 03 00 00 
+   00 00 05 00     00 03 00 00      02 02 02 00 
+   00 00 00 07     01 00 00 00      01 01 01 01
+
+d: 08 08 08 08  e: 00 01 00 02   f: 00 00 00 01 
+   04 04 04 04     03 00 04 00      00 00 03 02 
+   02 02 02 02     00 05 00 06      00 06 05 04 
+   01 01 01 01     07 00 08 00      10 09 08 07
+
+g: 01 02 03 04  h: 01 02 04 07   i: 01 02 06 07
+   12 13 14 05     03 05 08 11      03 05 08 13
+   11 16 15 06     06 09 12 14      04 09 12 14
+   10 09 08 07     10 13 15 16      10 15 11 16
+
 """
-def crear_matriz(n: int) -> list:
+
+def crear_matriz(n: int) -> list[list[int]]:
+    """
+    Crea una matriz de tamaño n x n con ceros.
+    args:
+        n (int): Tamaño de la matriz (n x n).
+    returns:
+        list: Matriz de tamaño n x n con ceros.
+    """
     return [[0] * n for _ in range(n)]
 
-def matriz_a(n: int) -> list:
+def imprimir_matriz(matriz: list[list[int]], matriz_nombre: str) -> None:
+    """
+    Imprime la matriz en un formato legible.
+    args:
+        matriz (list[list[int]]): Matriz a imprimir.
+        matriz_nombre (str): Nombre de la matriz a imprimir.
+    """
+    print(f"Matriz {matriz_nombre}:")
+    for fila in matriz:
+        print(fila)
+    print()
+
+def matriz_a(n: int) -> list[list[int]]:
+    """
+    Crea una matriz de tamaño n x n con los valores de la matriz a.
+    args:
+        n (int): Tamaño de la matriz (n x n).
+    returns:
+        list: Matriz de tamaño n x n con los valores de la matriz a.
+    """
     matriz = crear_matriz(n)
     for i in range(n):
         matriz[i][i] = 2 * i + 1
     return matriz
 
-def matriz_b(n: int) -> list:
+def matriz_b(n: int) -> list[list[int]]:
+    """
+    Crea una matriz de tamaño n x n con los valores de la matriz b.
+    args:
+        n (int): Tamaño de la matriz (n x n).
+    returns:
+        list: Matriz de tamaño n x n con los valores de la matriz b.
+    """
     matriz = crear_matriz(n)
     for i in range(n):
         matriz[i][n - 1 - i] = 3 ** i
     return matriz
 
-def matriz_c(n: int) -> list:
-    matriz = crear_matriz(n)
+def matriz_c(n: int) -> list[list[int]]:
+    """
+    Crea una matriz de tamaño n x n con los valores de la matriz c.
+    args:
+        n (int): Tamaño de la matriz (n x n).
+    returns:
+        list: Matriz de tamaño n x n con los valores de la matriz c.
+    """
+    matriz = crear_matriz(n)    
     for i in range(n):
         for j in range(i + 1):
             matriz[i][j] = n - i
     return matriz
 
+def matriz_d(n: int) -> list[list[int]]:
+    """
+    Crea una matriz de tamaño n x n con los valores de la matriz d.
+    args:
+        n (int): Tamaño de la matriz (n x n).
+    returns:
+        list: Matriz de tamaño n x n con los valores de la matriz d.
+    """
+    matriz = crear_matriz(n)
+    
+    val = n ** 2
+    for i in range(n):
+        for j in range(n):
+            matriz[i][j] = val / 2
+        val = val / 2
+    return matriz
+
+def matriz_e(n: int) -> list[list[int]]:
+    """
+    Crea una matriz de tamaño n x n con los valores de la matriz e.
+    args:
+        n (int): Tamaño de la matriz (n x n).
+    returns:
+        list: Matriz de tamaño n x n con los valores de la matriz e.
+    """
+    matriz = crear_matriz(n)
+    contador = 1
+
+    for i in range(n):
+        for j in range(n):
+            if (i + j) % 2 == 1:
+                matriz[i][j] = contador
+                contador += 1
+    return matriz
+
+def matriz_f(n: int) -> list[list[int]]:
+    """
+    Crea una matriz de tamaño n x n con los valores de la matriz f.
+    args:
+        n (int): Tamaño de la matriz (n x n).
+    returns:
+        list: Matriz de tamaño n x n con los valores de la matriz f.
+    """
+    matriz = crear_matriz(n)
+    for i in range( 1, n + 1 ):             
+        triangular_i = i * ( i + 1 ) // 2  #triangular de i 
+        for j in range( 1, n + 1 ): 
+            if i + j > n:
+                matriz[ i - 1 ][ j - 1 ] = triangular_i - ( i + j - ( n + 1 )) #triangular de i - (i + j - (n + 1))
+    return matriz
+
+
+def matriz_g(n: int) -> list[list[int]]:
+    """
+    Crea una matriz de tamaño n x n con los valores de la matriz g.
+    args:
+        n (int): Tamaño de la matriz (n x n).
+    returns:
+        list: Matriz de tamaño n x n con los valores de la matriz g.
+    """
+    pass
+
+def matriz_h(n: int) -> list[list[int]]:
+    """
+    Crea una matriz de tamaño n x n con los valores de la matriz h.
+    args:
+        n (int): Tamaño de la matriz (n x n).
+    returns:
+        list: Matriz de tamaño n x n con los valores de la matriz h.
+    """
+    pass
+
+def matriz_i(n: int) -> list[list[int]]:
+    """
+    Crea una matriz de tamaño n x n con los valores de la matriz i.
+    args:
+        n (int): Tamaño de la matriz (n x n).
+    returns:
+        list: Matriz de tamaño n x n con los valores de la matriz i.
+    """
+    pass
+    
+
 def main():
     n = int(input("Ingrese el tamaño de la matriz (N x N): "))
 
-    print("Matriz A:")
-    matriz = matriz_a(n)
-    for fila in matriz:
-        print(fila)
-    print()
-    print("Matriz B:")
-    matriz = matriz_b(n)
-    for fila in matriz:
-        print(fila)
-    print()
-    print("Matriz C:")
-    matriz = matriz_c(n)
-    for fila in matriz:
-        print(fila)
+    imprimir_matriz(matriz_a(n), 'A')
+    imprimir_matriz(matriz_b(n), 'B')
+    imprimir_matriz(matriz_c(n), 'C')
+    imprimir_matriz(matriz_d(n), 'D')
+    imprimir_matriz(matriz_e(n), 'E')
+    imprimir_matriz(matriz_f(n), 'F')
+    # imprimir_matriz(matriz_g(n), 'G')
+    # imprimir_matriz(matriz_h(n), 'H')
+    # imprimir_matriz(matriz_i(n), 'I')
 
 if __name__ == "__main__":
     main()

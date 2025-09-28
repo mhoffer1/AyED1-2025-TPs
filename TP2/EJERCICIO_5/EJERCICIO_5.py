@@ -6,7 +6,7 @@ además un programa para verificar el comportamiento de la función.
 
 def check_orden(lista: list) -> bool:
     """
-    Verifica si la lista estaa ordenada en forma ascendente.
+    Verifica si la lista esta ordenada en forma ascendente.
     - args:
         - lista (list): La lista a verificar.
     - return: True si la lista esta ordenada, False en caso contrario.

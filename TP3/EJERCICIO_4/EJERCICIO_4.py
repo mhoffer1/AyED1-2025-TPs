@@ -96,7 +96,7 @@ def matriz_d(n: int) -> list[list[int]]:
     val = n ** 2
     for i in range(n):
         for j in range(n):
-            matriz[i][j] = val / 2
+            matriz[i][j] = int(val / 2)
         val = val / 2
     return matriz
 
@@ -143,7 +143,39 @@ def matriz_g(n: int) -> list[list[int]]:
     returns:
         list: Matriz de tamaño n x n con los valores de la matriz g.
     """
-    pass
+    matriz = crear_matriz(n)
+    
+    superior = 0
+    inferior = n - 1
+    izquierda = 0
+    derecha = n - 1
+    
+    num = 1
+    
+    while superior <= inferior and izquierda <= derecha:
+        for col in range(izquierda, derecha + 1):
+            matriz[superior][col] = num
+            num += 1
+        superior += 1
+        
+        for row in range(superior, inferior + 1):
+            matriz[row][derecha] = num
+            num += 1
+        derecha -= 1
+        
+        if superior <= inferior:
+            for col in range(derecha, izquierda - 1, -1):
+                matriz[inferior][col] = num
+                num += 1
+            inferior -= 1
+        
+        if izquierda <= derecha:
+            for row in range(inferior, superior - 1, -1):
+                matriz[row][izquierda] = num
+                num += 1
+            izquierda += 1
+    
+    return matriz
 
 def matriz_h(n: int) -> list[list[int]]:
     """
@@ -175,7 +207,7 @@ def main():
     imprimir_matriz(matriz_d(n), 'D')
     imprimir_matriz(matriz_e(n), 'E')
     imprimir_matriz(matriz_f(n), 'F')
-    # imprimir_matriz(matriz_g(n), 'G')
+    imprimir_matriz(matriz_g(n), 'G')
     # imprimir_matriz(matriz_h(n), 'H')
     # imprimir_matriz(matriz_i(n), 'I')
 

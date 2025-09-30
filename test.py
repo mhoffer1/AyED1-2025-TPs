@@ -1,47 +1,42 @@
-from typing import List
-
-def crear_matriz(n: int) -> List[List[float]]:
+def matriz_g(n: int) -> list[list[int]]:
     """
-    Crea una matriz de tamaño n x n con ceros.
+    Crea una matriz de tamaño n x n con los valores de la matriz g.
     args:
         n (int): Tamaño de la matriz (n x n).
     returns:
-        List: Matriz de tamaño n x n con ceros.
+        list: Matriz de tamaño n x n con los valores de la matriz g.
     """
-    return [[0] * n for _ in range(n)]
     
-def imprimir_matriz(matriz: List[List[float]]) -> None:
-    """
-    Imprime la matriz en un formato legible.
-    args:
-        matriz (List[List[float]]): Matriz a imprimir.
-    """
-    for fila in matriz:
-        print(fila)
-
-# Definir el tamaño de la matriz
-n = 3  # Puedes cambiar este valor
-
-# Crear la matriz
-matriz = crear_matriz(n)
-nueva_matriz = crear_matriz(n)
-
-num = 1
-for i in range(n):
-    for j in range(n):
-        matriz[i][j] = num
-        num += 1
-
-resultado = []
-
-while matriz:
-    resultado += matriz.pop(0)
-    matriz = (list(zip(*matriz)))[::-1]
-
-num = 0
-for i in range(n):
-    for j in range(n):
-        nueva_matriz[i][j] = resultado[num]
-        num += 1
-
-imprimir_matriz(nueva_matriz)
+    matriz = crear_matriz(n)
+    
+    superior = 0
+    inferior = n - 1
+    izquierda = 0
+    derecha = n - 1
+    
+    num = 1
+    
+    while superior <= inferior and izquierda <= derecha:
+        for col in range(izquierda, derecha + 1):
+            matriz[superior][col] = num
+            num += 1
+        superior += 1
+        
+        for row in range(superior, inferior + 1):
+            matriz[row][derecha] = num
+            num += 1
+        derecha -= 1
+        
+        if superior <= inferior:
+            for col in range(derecha, izquierda - 1, -1):
+                matriz[inferior][col] = num
+                num += 1
+            inferior -= 1
+        
+        if izquierda <= derecha:
+            for row in range(inferior, superior - 1, -1):
+                matriz[row][izquierda] = num
+                num += 1
+            izquierda += 1
+    
+    return matriz

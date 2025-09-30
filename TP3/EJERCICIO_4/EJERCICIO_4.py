@@ -20,6 +20,7 @@ g: 01 02 03 04  h: 01 02 04 07   i: 01 02 06 07
    10 09 08 07     10 13 15 16      10 15 11 16
 
 """
+import tabulate
 
 def crear_matriz(n: int) -> list[list[int]]:
     """
@@ -39,8 +40,7 @@ def imprimir_matriz(matriz: list[list[int]], matriz_nombre: str) -> None:
         matriz_nombre (str): Nombre de la matriz a imprimir.
     """
     print(f"Matriz {matriz_nombre}:")
-    for fila in matriz:
-        print(fila)
+    print(tabulate.tabulate(matriz, tablefmt="plain"))
     print()
 
 def matriz_a(n: int) -> list[list[int]]:
@@ -153,22 +153,27 @@ def matriz_g(n: int) -> list[list[int]]:
     num = 1
     
     while superior <= inferior and izquierda <= derecha:
+
+        # Rellenar la fila superior
         for col in range(izquierda, derecha + 1):
             matriz[superior][col] = num
             num += 1
         superior += 1
         
+        # Rellenar la columna derecha
         for row in range(superior, inferior + 1):
             matriz[row][derecha] = num
             num += 1
         derecha -= 1
         
+        # Rellenar la fila inferior
         if superior <= inferior:
             for col in range(derecha, izquierda - 1, -1):
                 matriz[inferior][col] = num
                 num += 1
             inferior -= 1
         
+        # Rellenar la columna izquierda
         if izquierda <= derecha:
             for row in range(inferior, superior - 1, -1):
                 matriz[row][izquierda] = num
@@ -185,7 +190,7 @@ def matriz_h(n: int) -> list[list[int]]:
     returns:
         list: Matriz de tamaño n x n con los valores de la matriz h.
     """
-    pass
+    
 
 def matriz_i(n: int) -> list[list[int]]:
     """

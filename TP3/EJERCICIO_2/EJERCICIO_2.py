@@ -191,13 +191,23 @@ def matriz_h(n: int) -> list[list[int]]:
         list: Matriz de tamaño n x n con los valores de la matriz h.
     """
     matriz = crear_matriz(n)
+    # num = 1
+    # for k in range(n * 2 - 1):
+    #     for i in range(k + 1):
+    #         j = k - i
+    #         if i < n and j < n:
+    #             matriz[i][j] = num
+    #             num += 1
+    # return matriz
+
     num = 1
-    for k in range(n * 2 - 1):
-        for i in range(k + 1):
-            j = k - i
-            if i < n and j < n:
-                matriz[i][j] = num
-                num += 1
+    for s in range( 2*n - 1):              
+        i_min = max(0, s - (n - 1))
+        i_max = min(n - 1, s)
+        for i in range(i_min, i_max + 1):
+            j = s - i
+            matriz[i][j] = num
+            num += 1
     return matriz
 
 def matriz_i(n: int) -> list[list[int]]:
@@ -208,7 +218,26 @@ def matriz_i(n: int) -> list[list[int]]:
     returns:
         list: Matriz de tamaño n x n con los valores de la matriz i.
     """
-    pass
+    matriz = crear_matriz(n)
+    num = 1
+    
+    for diag in range(n * 2 - 1):
+        coords = []
+        
+        for i in range(diag + 1):
+            j = diag - i
+            if i < n and j < n:
+                coords.append((i, j))
+        
+        # Si la diagonal es impar, invertir el orden
+        if diag % 2 == 1:
+            coords.reverse()
+
+        for i, j in coords:
+            matriz[i][j] = num
+            num += 1
+    
+    return matriz
     
 
 def main():
@@ -222,7 +251,7 @@ def main():
     imprimir_matriz(matriz_f(n), 'F')
     imprimir_matriz(matriz_g(n), 'G')
     imprimir_matriz(matriz_h(n), 'H')
-    # imprimir_matriz(matriz_i(n), 'I')
+    imprimir_matriz(matriz_i(n), 'I')
 
 if __name__ == "__main__":
     main()

@@ -3,7 +3,13 @@ Leer una cadena de caracteres e imprimirla centrada en pantalla. Suponer que la
 misma tiene 80 columnas.
 """
 
-def centrar_cadena(cadena):
+def centrar_cadena(cadena: str) -> None:
+    """Imprime la cadena centrada en pantalla.
+    args:
+        cadena (str): Cadena a centrar.
+    returns:
+        None
+    """
     longitud = len(cadena)
     espacios = (80 - longitud) // 2
     print(" " * espacios + cadena)

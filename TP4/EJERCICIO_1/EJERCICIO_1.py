@@ -12,7 +12,7 @@ def es_capicua(cadena: str) -> bool:
     """
     largo = len(cadena)
     for i in range(largo // 2):
-        if cadena[i] != cadena[largo - 1 - i]:
+        if cadena[i] != cadena[- 1 - i]:
             return False
     return True
 

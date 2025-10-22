@@ -6,21 +6,15 @@ verificar su funcionamiento.
 
 def es_capicua(cadena: str) -> bool:
     """
-    Determina si una cadena es capicua de forma recursiva.
+    Determina si una cadena es capicua.
     - args: cadena (str): La cadena de caracteres a verificar.
     - returns: bool: True si la cadena es capicua, False en caso contrario.
     """
-    def chequear(i: int) -> bool:
-
-        largo = len(cadena)
-
-        if i >= largo // 2:
-            return True
-        if cadena[i] != cadena[- 1 - i]:
+    largo = len(cadena)
+    for i in range(largo // 2):
+        if cadena[i] != cadena[largo - 1 - i]:
             return False
-        return chequear(i + 1)
-
-    return chequear(0)
+    return True
 
 def main():
     cadena = input("Ingrese una cadena de caracteres: ")
